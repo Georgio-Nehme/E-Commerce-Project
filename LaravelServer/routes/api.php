@@ -28,14 +28,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group(['prefix' => 'user'], function(){
+   
     Route::post('/register', [AuthController::class, 'register'])->name("register");
     Route::post('/login', [AuthController::class, 'login'])->name("login");
+    
     Route::post('/logout', [AuthController::class, 'logout'])->name("logout");
 });
 
 Route::group(['prefix' => 'admin'], function(){
+    
     Route::post('/add_category', [AdminController::class, 'addCategory'])->name("add_category");
     Route::post('/add_product', [AdminController::class, 'addProduct'])->name("add_product");
+  
     Route::get('/all_categories', [AdminController::class, 'allCategories'])->name("all_categories");
     Route::get('/all_items', [AdminController::class, 'allItems'])->name("all_items");
 
