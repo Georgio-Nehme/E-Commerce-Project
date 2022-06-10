@@ -1,9 +1,12 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use app\Controllers\AuthController;
-use App\Http\Controllers;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +24,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/register', [AuthController::class, 'register'])->name("register");
-// Route::post('', [AuthController::class, '']);
-// Route::post('', [AuthController::class, '']);
+
+
+
+Route::group(['prefix' => 'user'], function(){
+    Route::post('/register', [AuthController::class, 'register'])->name("register");
+    Route::post('/login', [AuthController::class, 'login'])->name("login");
+    Route::post('/logout', [AuthController::class, 'logout'])->name("logout");
+});
+
+Route::group(['prefix' => 'admin'], function(){
+    Route::post('/add_category', [AdminController::class, 'addCategory'])->name("add_category");
+    Route::post('/add_product', [AdminController::class, 'addProduct'])->name("add_product");
+    Route::get('/all_categories', [AdminController::class, 'allCategories'])->name("all_categories");
+    Route::get('/all_items', [AdminController::class, 'allItems'])->name("all_items");
+
+});
