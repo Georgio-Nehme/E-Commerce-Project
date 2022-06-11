@@ -31,7 +31,8 @@ Route::group(['prefix' => 'user'], function(){
    
     Route::post('/register', [AuthController::class, 'register'])->name("register");
     Route::post('/login', [AuthController::class, 'login'])->name("login");
-    Route::post('/logout', [AuthController::class, 'logout'])->name("logout");
+    Route::post('/favorite', [UserController::class, 'favorite'])->name("like");
+    
 });
 
 Route::group(['prefix' => 'admin'], function(){
@@ -42,3 +43,4 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/all_products', [AdminController::class, 'allProducts'])->name("all_products");
 
 });
+
